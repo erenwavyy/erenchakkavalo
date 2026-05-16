@@ -70,9 +70,8 @@ async function handleProfile(interaction) {
       const agent = player.character;
       if (!agentMap[agent]) agentMap[agent] = { games: 0, kills: 0, deaths: 0, assists: 0, wins: 0, score: 0, rounds: 0 };
 
-      const won = player.team === "Blue"
-        ? match.metadata.teams.blue.has_won
-        : !match.metadata.teams.blue.has_won;
+      const blueWon1 = match.metadata?.teams?.blue?.has_won ?? match.teams?.blue?.has_won ?? false;
+      const won = player.team === "Blue" ? blueWon1 : !blueWon1;
 
       agentMap[agent].games++;
       agentMap[agent].kills   += player.stats.kills;
@@ -136,7 +135,8 @@ async function handleHistory(interaction) {
       if (!player) continue;
 
       const meta   = match.metadata;
-      const won    = player.team === "Blue" ? meta.teams.blue.has_won : !meta.teams.blue.has_won;
+      const blueWon2 = meta?.teams?.blue?.has_won ?? match.teams?.blue?.has_won ?? false;
+      const won    = player.team === "Blue" ? blueWon2 : !blueWon2;
       const acs    = Math.round(player.stats.score / Math.max(meta.rounds_played, 1));
       const kd     = (player.stats.kills / Math.max(player.stats.deaths, 1)).toFixed(2);
       const result = won ? "✅ W" : "❌ L";
@@ -182,9 +182,8 @@ async function handleRank(interaction) {
         p => p.name.toLowerCase() === name.toLowerCase() && p.tag.toLowerCase() === tag.toLowerCase()
       );
       if (!player) continue;
-      const won = player.team === "Blue"
-        ? match.metadata.teams.blue.has_won
-        : !match.metadata.teams.blue.has_won;
+      const blueWon3 = match.metadata?.teams?.blue?.has_won ?? match.teams?.blue?.has_won ?? false;
+      const won = player.team === "Blue" ? blueWon3 : !blueWon3;
       if (won) wins++;
     }
     const winRate = matches.length ? Math.round((wins / matches.length) * 100) : "—";
