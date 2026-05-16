@@ -1,0 +1,11 @@
+# railway.toml — Railway deployment config
+[build]
+builder = "NIXPACKS"
+
+[deploy]
+startCommand = "node index.js"
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 5
+
+# Canvas needs these system libs on Linux (Railway provides them via nixpacks)
+# If you have build errors, add this nixpacks.toml too (see README)
