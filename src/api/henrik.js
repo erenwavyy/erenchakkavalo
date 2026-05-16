@@ -17,9 +17,10 @@ async function fetchLatestMatch(region, name, tag) {
 async function get(url) {
   const res = await axios.get(url, {
     timeout: 12000,
-    headers: {
-      "User-Agent": "valorant-discord-bot/2.0",
-    },
+   headers: {
+  "User-Agent": "valorant-discord-bot/2.0",
+  "Authorization": process.env.HENRIK_API_KEY,
+},
   });
 
   if (res.data?.status !== 200 && res.data?.errors) {
