@@ -3,7 +3,7 @@
 // Docs: https://docs.henrikdev.xyz
 
 const axios = require("axios");
-const logger = require("../../utils/logger");
+const logger = require("../utils/logger");
 
 const BASE = "https://api.henrikdev.xyz/valorant";
 const RETRY_ATTEMPTS = 3;
