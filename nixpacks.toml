@@ -1,8 +1,8 @@
 # nixpacks.toml
-# Tells Railway/Render to install system libraries needed by node-canvas
-
 [phases.setup]
 nixPkgs = [
+  "nodejs_20",
+  "npm",
   "cairo",
   "pango",
   "libjpeg",
